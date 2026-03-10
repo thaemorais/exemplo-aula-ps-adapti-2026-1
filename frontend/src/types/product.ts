@@ -5,6 +5,6 @@ export type Product = {
     preco: number;
     ano_lancamento: number;
     imagem: string;
-    categoria: string;
+    categoria_id: string;
     qtd_estoque: number;
 }

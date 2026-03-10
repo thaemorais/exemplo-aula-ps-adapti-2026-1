@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Categoria;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategoriaSeeder extends Seeder
@@ -13,6 +12,10 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
-        Categoria::factory()->count(10)->create();
+        $categorias = ['Corda', 'Sopro', 'Percussão', 'Outros'];
+
+        foreach ($categorias as $nome) {
+            Categoria::firstOrCreate(['nome' => $nome]);
+        }
     }
 }
