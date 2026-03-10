@@ -13,7 +13,7 @@ export default function ProductCard( product: Product ) {
         <p className={styles.productCategory}>Categoria: {product.categoria}</p>
         <p className={styles.productBrand}>Marca: {product.marca}</p>
         <p className={styles.productYear}>Lançamento: {product.ano_lancamento}</p>
-        <p className={styles.productPrice}>R$ {product.preco.toFixed(2)}</p>
+        <p className={styles.productPrice}>R$ {product.preco}</p>
         <p className={styles.productStock}>{product.qtd_estoque} em estoque</p>
         <button className={styles.productButton}>Comprar</button>
     </div>
