@@ -1,0 +1,35 @@
+.header {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.headerLinks {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
+}
+
+.headerLink {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.headerLink:hover {
+  color: #f69915;
+  scale: 1.05;
+  transition: all 0.3s ease-in-out;
+  border-bottom: 2px solid #f69915;
+}
