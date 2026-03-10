@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from '@/components/dialog'
 import FormFieldsSportsItem from './form-fields-sports-item'
-import { updateSportsItem } from '@/actions/sportsItem'
+import { updateSportsItem } from '@/actions/instrumentsItem'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Categoria;
+use App\Models\Instrumento;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,5 +22,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
         $user->assignPermission('admin');
+
+        $this->call([
+            CategoriaSeeder::class,
+            InstrumentoSeeder::class,
+        ]);
     }
 }

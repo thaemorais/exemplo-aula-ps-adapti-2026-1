@@ -16,18 +16,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
     Route::apiResource('/users', UserController::class);
-    Route::get('/categorias', [CategoriaController::class, 'index']);
-    Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
     Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
-    Route::get('/instrumentos', [InstrumentoController::class, 'index']);
-    Route::get('/instrumentos/{id}', [InstrumentoController::class, 'show']);
     Route::delete('/instrumentos/{id}', [InstrumentoController::class, 'destroy']);
+    Route::post('/categorias', [CategoriaController::class, 'store']);
+    Route::post('/instrumentos', [InstrumentoController::class, 'store']);
 });
 
-Route::post('/categorias', [CategoriaController::class, 'store']);
-Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
-Route::post('/instrumentos', [InstrumentoController::class, 'store']);
+Route::get('/instrumentos', [InstrumentoController::class, 'index']);
+Route::get('/instrumentos/{id}', [InstrumentoController::class, 'show']);
 Route::put('/instrumentos/{id}', [InstrumentoController::class, 'update']);
+
+Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
+Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
