@@ -4,9 +4,8 @@ import styles from './productCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { buyInstrument } from '@/actions/instrumentsItem'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Instrument } from '@/types/instrument'
-import { revalidatePath } from 'next/cache'
 
 export default function ProductCard(product: Instrument) {
   const [loading, setLoading] = useState(false)

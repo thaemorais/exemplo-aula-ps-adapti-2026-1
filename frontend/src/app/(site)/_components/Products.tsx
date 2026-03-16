@@ -24,7 +24,7 @@ export default function Products() {
     }, [])
 
     return (
-        <section className={styles.products}> 
+        <section className={styles.products} id="products"> 
             <div className={styles.container}>
                 <h1 className={styles.title}>Nossos Produtos</h1>
                 <div className={styles.productsList}>
