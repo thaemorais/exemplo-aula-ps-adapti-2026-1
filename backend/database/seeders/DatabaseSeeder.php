@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Categoria;
-use App\Models\Instrumento;
+use App\Models\Category;
+use App\Models\Instrument;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,16 +16,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         User::factory(10)->create();
+        Category::factory(5)->create();
+        Instrument::factory(10)->create();
 
         $user = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
         $user->assignPermission('admin');
-
-        $this->call([
-            CategoriaSeeder::class,
-            InstrumentoSeeder::class,
-        ]);
     }
 }

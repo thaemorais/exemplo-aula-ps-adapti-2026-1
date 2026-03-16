@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoriaController;
-use App\Http\Controllers\InstrumentoController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,21 +14,19 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/{id}', [CategoryController::class, 'show']);
+
+Route::get('/instruments', [InstrumentController::class, 'index']);
+Route::get('/instruments/{id}', [InstrumentController::class, 'show']);
+
+Route::post('instruments/{id}/buy', [InstrumentController::class, 'buy']);
+
 Route::middleware(['auth:sanctum', 'can:admin'])->group(function () {
     Route::apiResource('/users', UserController::class);
-    Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
-    Route::delete('/instrumentos/{id}', [InstrumentoController::class, 'destroy']);
-    Route::post('/categorias', [CategoriaController::class, 'store']);
-    Route::post('/instrumentos', [InstrumentoController::class, 'store']);
+    Route::apiResource('/category', CategoryController::class)->except(['index', 'show']);
+    Route::apiResource('/instruments', InstrumentController::class)->except(['index', 'show']);
 });
-
-Route::get('/instrumentos', [InstrumentoController::class, 'index']);
-Route::get('/instrumentos/{id}', [InstrumentoController::class, 'show']);
-Route::put('/instrumentos/{id}', [InstrumentoController::class, 'update']);
-
-Route::get('/categorias', [CategoriaController::class, 'index']);
-Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
-Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
