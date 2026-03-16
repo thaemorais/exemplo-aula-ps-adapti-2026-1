@@ -1,4 +1,6 @@
 export type Category = {
-    id: string;
-    nome: string;
+  id: string
+  name: string
 }
+
+export type categoryType = Category

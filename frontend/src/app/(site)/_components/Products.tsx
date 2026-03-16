@@ -1,19 +1,19 @@
 'use client';
 
-import { Product } from '@/types/product';
 import ProductCard from './ProductCard';
 import styles from './products.module.css'
 import { useEffect, useState } from 'react';
 import { api } from '@/services/api';
+import { Instrument } from '@/types/instrument';
 
 export default function Products() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Instrument[]>([]);
 
     useEffect(() => {
         const buscarProdutos = async () => {
-            const { response, error } = await api('GET', '/instrumentos');
+            const { response, error } = await api<Instrument[]>('GET', '/instruments');
             if (response) {
-                setProducts(response as Product[]);
+                setProducts(response);
             } else {
                 console.error('Error:', error);
             }
