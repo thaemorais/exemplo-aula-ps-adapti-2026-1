@@ -10,27 +10,29 @@ export default function Products() {
     const [products, setProducts] = useState<Instrument[]>([]);
 
     useEffect(() => {
-        const buscarProdutos = async () => {
-            const { response, error } = await api<Instrument[]>('GET', '/instruments');
+        async function getInstruments() {
+            const { response, error } = await api('GET', '/instruments')
+      
             if (response) {
-                setProducts(response);
+                setProducts(response as Instrument[])
             } else {
-                console.error('Error:', error);
+                console.error(error?.message)
             }
         }
-        buscarProdutos();
-    }, []);
+      
+        getInstruments()
+    }, [])
 
-  return (
-    <section className={styles.products}> 
-        <div className={styles.container}>
-            <h1 className={styles.title}>Nossos Produtos</h1>
-            <div className={styles.productsList}>
-                {products.map((product) => (
-                    <ProductCard key={product.id} {...product} />
-                ))}
+    return (
+        <section className={styles.products}> 
+            <div className={styles.container}>
+                <h1 className={styles.title}>Nossos Produtos</h1>
+                <div className={styles.productsList}>
+                    {products.map((product) => (
+                        <ProductCard key={product.id} {...product} />
+                    ))}
+                </div>
             </div>
-        </div>
-    </section>
-  )
+        </section>
+    )
 }

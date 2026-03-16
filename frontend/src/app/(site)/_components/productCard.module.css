@@ -5,6 +5,13 @@
   padding: 20px;
   text-align: center;
   position: relative;
+  transition: all 0.3s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
 .productLink {
@@ -77,4 +84,9 @@
   font-weight: 500;
   cursor: pointer;
   width: 100%;
+}
+
+.productButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

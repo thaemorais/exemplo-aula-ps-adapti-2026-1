@@ -4,23 +4,24 @@ import styles from './productCard.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 import { buyInstrument } from '@/actions/instrumentsItem'
-import { useToast } from '@/components/use-toast'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Instrument } from '@/types/instrument'
+import { revalidatePath } from 'next/cache'
 
 export default function ProductCard(product: Instrument) {
   const [loading, setLoading] = useState(false)
-  const { toast } = useToast()
+  const [amount, setAmount] = useState(product.amount)
 
-  const handleBuy = async () => {
+  async function handleBuy() {
     setLoading(true)
     const result = await buyInstrument(product.id)
-    const { error } = await JSON.parse(result)
+    const { response, error } = await JSON.parse(result)
     setLoading(false)
-    if (error) {
-      toast({ title: error.message ?? 'Não foi possível realizar a compra.', variant: 'destructive' })
+
+    if (response) {
+      setAmount(amount - 1)
     } else {
-      toast({ title: 'Compra realizada com sucesso!' })
+      console.error(error?.message)
     }
   }
 
@@ -44,12 +45,12 @@ export default function ProductCard(product: Instrument) {
       <p className={styles.productPrice}>
         R$ {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}
       </p>
-      <p className={styles.productStock}>{product.amount} em estoque</p>
+      <p className={styles.productStock}>{amount} em estoque</p>
       <button
         type="button"
         className={styles.productButton}
         onClick={handleBuy}
-        disabled={loading || product.amount <= 0}
+        disabled={loading || amount <= 0}
       >
         {loading ? 'Processando...' : 'Comprar'}
       </button>
