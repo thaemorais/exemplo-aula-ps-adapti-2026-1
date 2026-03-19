@@ -1,3 +1,4 @@
+'use client'
 import { DashboardContainer } from '@/components/dashboard/dashboard-items'
 import {
   Table,
@@ -17,19 +18,32 @@ import { DialogCategoryDelete } from './dialog-delete-category'
 import { DialogInformationCategory } from './dialog-information-category'
 import { DialogCreateCategory } from './dialog-create-category'
 import { api } from '@/services/api'
+import { useEffect, useState } from 'react'
 
-export default async function ListCategory() {
-  const { response } = await api<categoryType[]>('GET', '/category')
+export default function ListCategory() {
+  const [categories, setCategories] = useState<categoryType[]>([])
 
-  if (!response) {
+  useEffect(() => {
+    async function getCategories() {
+        const { response, error } = await api('GET', '/category')
+  
+        if (response) {
+            setCategories(response as categoryType[])
+        } else {
+            console.error(error?.message)
+        }
+    }
+  
+    getCategories()
+}, [])
+
+  if (!categories) {
     return (
       <DashboardContainer className="text-destructive">
         Não foi possível obter as categorias.
       </DashboardContainer>
     )
   }
-
-  const categories: categoryType[] = response
 
   return (
     <>

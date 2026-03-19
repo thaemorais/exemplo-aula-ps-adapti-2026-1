@@ -38,9 +38,9 @@ export function SidebarMain() {
           <LuUsers />
           <SidebarNavLinkLabel>Usuários</SidebarNavLinkLabel>
         </SidebarNavLink>
-        <SidebarNavLink href="/admin/artigos-esportivos">
+        <SidebarNavLink href="/admin/instrumentos">
           <MdOutlineSportsHandball />
-          <SidebarNavLinkLabel>Artigos Esportivos</SidebarNavLinkLabel>
+          <SidebarNavLinkLabel>Instrumentos</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/categorias">
           <TbCategory />

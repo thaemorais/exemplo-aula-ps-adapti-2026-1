@@ -31,15 +31,18 @@ export function DialogUpdateCategory({
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) return
+    setCategory(null)
+
     const requestData = async () => {
-      const { response } = await api<categoryType>('GET', `/category/${id}`)
+      const { response } = await api('GET', `/category/${id}`)
 
       if (response) {
-        setCategory(response)
+        setCategory(response as categoryType)
       } else {
         setCategory(null)
         toast({
-          title: 'Categoria  não encontrada!',
+          title: 'Categoria não encontrada!',
         })
         setOpen(false)
       }

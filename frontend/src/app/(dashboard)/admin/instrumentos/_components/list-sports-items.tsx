@@ -19,12 +19,12 @@ import { DialogInformationSportsItem } from './dialog-information-sports-item'
 import { DialogCreateSportsItem } from './dialog-create-sports-item'
 
 export default async function ListSportsItems() {
-  const { response } = await api<sportsItemType[]>('GET', '/instruments')
+  const { response } = null // requisicao para api
 
   if (!response) {
     return (
       <DashboardContainer className="text-destructive">
-        Não foi possível obter os artigos esportivos.
+        Não foi possível obter os imóveis.
       </DashboardContainer>
     )
   }
@@ -46,7 +46,7 @@ export default async function ListSportsItems() {
           <TableHeader>
             <TableRow>
               <TableHead>Imagem</TableHead>
-              <TableHead>Nome</TableHead>
+              <TableHead>Titulo</TableHead>
               <TableHead>Categoria</TableHead>
               <TableHead>Quantidade</TableHead>
               <TableHead className="text-right">Ações</TableHead>
@@ -58,9 +58,11 @@ export default async function ListSportsItems() {
                 <TableCell>
                   <TabbleCellImage src={sportsItem.image} />
                 </TableCell>
-                <TableCell>{sportsItem.name}</TableCell>
-                <TableCell>{sportsItem.category?.name ?? '-'}</TableCell>
+                
+                <TableCell>{sportsItem.title}</TableCell>
                 <TableCell>{sportsItem.amount}</TableCell>
+                <TableCell>{sportsItem.category.name}</TableCell>
+                {/* demais propriedades de sportsItemType */}
                 
                 <TableCell className="flex justify-end gap-2">
                   <DialogInformationSportsItem id={sportsItem.id}>

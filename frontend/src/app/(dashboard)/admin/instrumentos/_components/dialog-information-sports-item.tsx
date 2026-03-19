@@ -30,7 +30,7 @@ export function DialogInformationSportsItem({
 
   useEffect(() => {
     const requestData = async () => {
-      const { response } = await api<sportsItemType>('GET', `/instruments/${id}`)
+      const { response } = null
 
       if (response) {
         setSportsItem(response)

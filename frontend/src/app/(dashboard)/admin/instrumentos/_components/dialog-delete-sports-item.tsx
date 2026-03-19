@@ -1,6 +1,6 @@
 'use client'
 
-import { destroySportsItem } from '@/actions/instrumentsItem'
+import { destroySportsItem } from '@/actions/sportsItem'
 import { Button } from '@/components/button'
 import {
   Dialog,

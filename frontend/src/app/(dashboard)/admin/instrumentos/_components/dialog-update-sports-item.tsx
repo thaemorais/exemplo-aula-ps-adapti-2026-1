@@ -9,7 +9,7 @@ import {
   DialogDescription,
 } from '@/components/dialog'
 import FormFieldsSportsItem from './form-fields-sports-item'
-import { updateSportsItem } from '@/actions/instrumentsItem'
+import { updateSportsItem } from '@/actions/sportsItem'
 import { filterFormData } from '@/services/filter-form-data'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
@@ -29,7 +29,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
 
   useEffect(() => {
     const requestData = async () => {
-      const { response } = await api<sportsItemType>('GET', `/instruments/${id}`)
+      const { response } = await api<sportsItemType>('GET', `/sports-items/${id}`)
 
       if (response) {
         setSportsItem(response)
@@ -53,7 +53,7 @@ export function DialogUpdateSportsItem({ id, children }: DialogUpdateSportsItemP
   const submit = async (form: FormData) => {
     const newForm = await filterFormData(form)
 
-    const { error } = await JSON.parse(await updateSportsItem(newForm))
+    const { error } = null 
 
     if (error) {
       setError(error)
