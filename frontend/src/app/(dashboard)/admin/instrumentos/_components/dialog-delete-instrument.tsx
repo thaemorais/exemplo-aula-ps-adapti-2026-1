@@ -1,6 +1,6 @@
 'use client'
 
-import { destroySportsItem } from '@/actions/sportsItem'
+import { destroyInstrumentsItem } from '@/actions/instrumentsItem'
 import { Button } from '@/components/button'
 import {
   Dialog,
@@ -14,25 +14,25 @@ import {
 import { useToast } from '@/components/use-toast'
 import { useState } from 'react'
 
-interface DialogCreateSportsItemProps {
+interface DialogCreateInstrumentProps {
   id: string
   children: React.ReactNode
 }
 
-export function DialogSportsItemDelete({ id, children }: DialogCreateSportsItemProps) {
+export function DialogInstrumentDelete({ id, children }: DialogCreateInstrumentProps) {
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   const submit = async () => {
-    const { error } = await JSON.parse(await destroySportsItem(id))
+    const { error } = await JSON.parse(await destroyInstrumentsItem(id))
 
     if (error) {
       toast({
-        title: 'Não foi possível excluir o artigo esportivo!',
+        title: 'Não foi possível excluir o instrumento!',
       })
     } else {
       toast({
-        title: 'Artigo esportivo deletado com sucesso!',
+        title: 'Instrumento deletado com sucesso!',
       })
     }
 
@@ -44,10 +44,10 @@ export function DialogSportsItemDelete({ id, children }: DialogCreateSportsItemP
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Confirmar exclusão do artigo esportivo</DialogTitle>
+          <DialogTitle>Confirmar exclusão do instrumento</DialogTitle>
           <DialogDescription>
-            Tem certeza de que deseja excluir este artigo esportivo? Esta ação é
-            irreversível e removerá permanentemente o artigo esportivo do sistema. Deseja
+            Tem certeza de que deseja excluir este instrumento? Esta ação é
+            irreversível e removerá permanentemente o instrumento do sistema. Deseja
             continuar com a exclusão?
           </DialogDescription>
         </DialogHeader>

@@ -4,8 +4,8 @@ import {
   DashboardHeaderTitle,
   DashboardMain,
 } from '@/components/dashboard/dashboard-items'
-import { MdOutlineSportsHandball } from "react-icons/md";
-import ListSportsItems from './_components/list-sports-items';
+import { GiGuitar } from "react-icons/gi";
+import ListSportsItems from './_components/list-instrument';
 import { Suspense } from 'react'
 
 export default async function Page() {
@@ -13,11 +13,11 @@ export default async function Page() {
     <>
       <DashboardHeader>
         <DashboardHeaderTitle>
-        <MdOutlineSportsHandball />
-          Artigos Esportivos
+          <GiGuitar />
+          Instrumentos
         </DashboardHeaderTitle>
         <DashboardHeaderDescription>
-          Cadastre, edite, visualize e exclua artigos esportivos.
+          Cadastre, edite, visualize e exclua Instrumentos.
         </DashboardHeaderDescription>
       </DashboardHeader>
       <DashboardMain>

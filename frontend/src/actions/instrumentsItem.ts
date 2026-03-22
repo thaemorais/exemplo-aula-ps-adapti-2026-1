@@ -13,7 +13,7 @@ export async function createInstrumentsItem(form: FormData) {
 
   // Se não houve erro, invalida a página de listagem para mostrar o novo instrumento
   if (!res.error) {
-    revalidatePath('/admin/instruments')
+    revalidatePath('/admin/instrumentos')
   }
 
   // Retorna o resultado serializado para o cliente tratar sucesso/erro
@@ -25,11 +25,11 @@ export async function updateInstrumentsItem(form: FormData) {
   // Pega o id do instrumento enviado no formulário (campo hidden)
   const id = form.get('id') as string
   // Envia PUT para /instruments/:id com os campos atualizados
-  const res = await api('PUT', `/instruments/${id}`, { data: form })
+  const res = await api('POST', `/instruments/${id}`, { data: form })
 
   // Se não houve erro, invalida a listagem para refletir a alteração
   if (!res.error) {
-    revalidatePath('/admin/instruments')
+    revalidatePath('/admin/instrumentos')
   }
 
   return JSON.stringify(res)
@@ -42,7 +42,7 @@ export async function destroyInstrumentsItem(id: string) {
 
   // Se não houve erro, invalida a listagem para remover o instrumento da UI
   if (!res.error) {
-    revalidatePath('/admin/instruments')
+    revalidatePath('/admin/instrumentos')
   }
 
   return JSON.stringify(res)

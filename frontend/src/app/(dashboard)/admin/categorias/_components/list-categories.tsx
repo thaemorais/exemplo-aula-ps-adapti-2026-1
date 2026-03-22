@@ -35,7 +35,7 @@ export default function ListCategory() {
     }
   
     getCategories()
-}, [])
+  }, [])
 
   if (!categories) {
     return (

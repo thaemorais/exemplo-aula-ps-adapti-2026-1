@@ -11,7 +11,8 @@ import {
   SidebarHeaderLogo,
   UserDropdown,
 } from '@/components/dashboard/sidebar'
-import { LuHome, LuLogOut, LuUsers } from 'react-icons/lu'
+import { LuLogOut, LuUsers } from 'react-icons/lu'
+import { GiGuitar } from "react-icons/gi";
 import { DropdownMenuItem } from '@/components/dropdown-menu'
 import { signOut, useSession } from 'next-auth/react'
 import logo from '@/assets/img/logo.jpeg'
@@ -39,7 +40,7 @@ export function SidebarMain() {
           <SidebarNavLinkLabel>Usuários</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/instrumentos">
-          <MdOutlineSportsHandball />
+          <GiGuitar />
           <SidebarNavLinkLabel>Instrumentos</SidebarNavLinkLabel>
         </SidebarNavLink>
         <SidebarNavLink href="/admin/categorias">

@@ -8,44 +8,49 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/dialog'
-import FormFieldsSportsItem from './form-fields-sports-item'
-import { sportsItemType } from '@/types/sportsItem'
+import FormFieldsInstrument from './form-fields-instrument'
+import { InstrumentType } from '@/types/instrument'
 import { api } from '@/services/api'
 import { useEffect, useState } from 'react'
 import { useToast } from '@/components/use-toast'
 
-interface DialogInformationSportsItemProps {
+interface DialogInstrumentInformationProps {
   id: string
   children: React.ReactNode
   isInformation?: boolean
 }
 
-export function DialogInformationSportsItem({
+export function DialogInstrumentInformation({
   id,
   children,
-}: DialogInformationSportsItemProps) {
-  const [sportsItem, setSportsItem] = useState<sportsItemType | null>(null)
+}: DialogInstrumentInformationProps) {
+  const [instrument, setInstrument] = useState<InstrumentType | null>(null)
   const [open, setOpen] = useState<boolean>()
   const { toast } = useToast()
 
   useEffect(() => {
+    if (!open) {
+      setInstrument(null)
+      return
+    }
+
+    setInstrument(null)
+
     const requestData = async () => {
-      const { response } = null
+      const { response } = await api<InstrumentType>('GET', `/instruments/${id}`)
 
       if (response) {
-        setSportsItem(response)
+        setInstrument(response)
       } else {
-        setSportsItem(null)
         toast({
-          title: 'Artigo esportivo não encontrado!',
+          title: 'Instrumento não encontrado!',
         })
         setOpen(false)
       }
     }
 
     requestData()
-
-    return () => setSportsItem(null)
+    return () => setInstrument(null)
   }, [id, open, toast])
 
   return (
@@ -53,12 +58,16 @@ export function DialogInformationSportsItem({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Informações do artigo esportivo</DialogTitle>
+          <DialogTitle>Informações do instrumento</DialogTitle>
           <DialogDescription>
-            Visualize as informações detalhadas do artigo esportivo abaixo.
+            Visualize as informações detalhadas do instrumento abaixo.
           </DialogDescription>
         </DialogHeader>
-        <FormFieldsSportsItem sportsItem={sportsItem} readOnly />
+        {instrument ? (
+          <FormFieldsInstrument instrument={instrument} readOnly />
+        ) : (
+          <p className="text-muted-foreground text-sm">Carregando...</p>
+        )}
       </DialogContent>
     </Dialog>
   )

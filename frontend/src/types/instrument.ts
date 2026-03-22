@@ -1,6 +1,6 @@
 import { Category } from './category'
 
-export type Instrument = {
+export type InstrumentType = {
   id: string
   name: string
   brand: string
