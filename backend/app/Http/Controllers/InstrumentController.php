@@ -41,9 +41,9 @@ class InstrumentController extends Controller
     public function store(StoreInstrumentRequest $request): JsonResponse
     {
         $data = $request->validated();
-        $instrument = $this->instrument->create($data);
+        $instrument = $this->instrument->create(collect($data)->except('image')->toArray());
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('instruments', 'public');
             $instrument->image = url('storage/'.$path);
             $instrument->save();
@@ -80,18 +80,19 @@ class InstrumentController extends Controller
         $instrument = $this->instrument->with('category')->findOrFail($id);
         $data = $request->validated();
 
-        if ($request->hasFile('image') && $instrument['image']) {
-            $image_name = explode('instruments', $instrument['image']);
-            if (isset($image_name[1])) {
-                $oldImagePath = 'instruments/'.$image_name[1];
+        $oldImagePath = null;
+        if (! empty($instrument->image)) {
+            $parsedPath = parse_url($instrument->image, PHP_URL_PATH);
+            if (is_string($parsedPath) && str_starts_with($parsedPath, '/storage/')) {
+                $oldImagePath = ltrim(substr($parsedPath, strlen('/storage/')), '/');
             }
         }
 
         $updateSuccess = $instrument->update(collect($data)->except('image')->toArray());
 
         if ($updateSuccess && $request->hasFile('image')) {
-            $path = $request->file('image')->store('instrument', 'public');
-            $instrument['image'] = url('storage/'.$path);
+            $path = $request->file('image')->store('instruments', 'public');
+            $instrument->image = url('storage/'.$path);
             $instrument->save();
 
             if ($oldImagePath) {

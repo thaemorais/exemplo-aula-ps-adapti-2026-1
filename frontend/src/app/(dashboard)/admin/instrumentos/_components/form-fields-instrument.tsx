@@ -16,7 +16,7 @@ import { api, ResponseErrorType } from '@/services/api'
 import { InstrumentType } from '@/types/instrument'
 import { useEffect, useState } from 'react'
 import { useFormStatus } from 'react-dom'
-import { categoryType } from '@/types/category'
+import { CategoryType } from '@/types/category'
 
 interface FormFieldsInstrumentProps {
   instrument?: InstrumentType | null
@@ -31,15 +31,15 @@ export default function FormFieldsInstrument({
 }: FormFieldsInstrumentProps) {
   const { pending } = useFormStatus()
   const [updateImage, setUpdateImage] = useState<string | undefined>()
-  const [categories, setCategories] = useState<categoryType[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<categoryType | null>(instrument?.category ?? null)
+  const [categories, setCategories] = useState<CategoryType[]>([])
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(instrument?.category ?? null)
 
   useEffect(() => {
     async function getCategories() {
         const { response, error } = await api('GET', '/category')
   
         if (response) {
-            setCategories(response as categoryType[])
+            setCategories(response as CategoryType[])
         } else {
             console.error(error?.message)
         }

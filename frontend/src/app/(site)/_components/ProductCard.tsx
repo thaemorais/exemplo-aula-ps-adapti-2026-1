@@ -45,14 +45,18 @@ export default function ProductCard(instrument: InstrumentType) {
         R$ {typeof instrument.price === 'number' ? instrument.price.toFixed(2) : instrument.price}
       </p>
       <p className={styles.productStock}>{amount} em estoque</p>
-      <button
-        type="button"
-        className={styles.productButton}
-        onClick={handleBuy}
-        disabled={loading || amount <= 0}
-      >
-        {loading ? 'Processando...' : 'Comprar'}
-      </button>
+      {amount > 0 ? (
+        <button
+          type="button"
+          className={styles.productButton}
+          onClick={handleBuy}
+          disabled={loading || amount <= 0}
+        >
+          {loading ? 'Processando...' : 'Comprar'}
+        </button>
+      ) : (
+        <button className={styles.productButton} disabled>Esgotado</button>
+      )}
     </div>
   )
 }

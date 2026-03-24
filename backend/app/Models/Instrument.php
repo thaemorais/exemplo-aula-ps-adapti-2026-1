@@ -31,9 +31,18 @@ class Instrument extends Model
     {
         self::deleted(function (Instrument $instrument) {
             try {
-                $image_name = explode('instruments/', $instrument['image']);
-                Storage::disk('public')->delete('instruments/'.$image_name[1]);
-            } catch (Throwable){
+                if (empty($instrument->image)) {
+                    return;
+                }
+                $parsedPath = parse_url($instrument->image, PHP_URL_PATH);
+                if (! is_string($parsedPath) || ! str_starts_with($parsedPath, '/storage/')) {
+                    return;
+                }
+                $relative = ltrim(substr($parsedPath, strlen('/storage/')), '/');
+                if ($relative !== '') {
+                    Storage::disk('public')->delete($relative);
+                }
+            } catch (Throwable) {
             }
         });
     }
