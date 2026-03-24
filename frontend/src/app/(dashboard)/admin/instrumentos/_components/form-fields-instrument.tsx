@@ -32,7 +32,9 @@ export default function FormFieldsInstrument({
   const { pending } = useFormStatus()
   const [updateImage, setUpdateImage] = useState<string | undefined>()
   const [categories, setCategories] = useState<CategoryType[]>([])
-  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(instrument?.category ?? null)
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType | null>(
+    instrument?.category ?? null,
+  )
 
   useEffect(() => {
     async function getCategories() {

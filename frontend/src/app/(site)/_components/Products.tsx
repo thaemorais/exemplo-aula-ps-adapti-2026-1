@@ -23,6 +23,8 @@ export default function Products() {
         getInstruments()
     }, [])
 
+    console.log(instruments)
+
     return (
         <section className={styles.products} id="products"> 
             <div className={styles.container}>

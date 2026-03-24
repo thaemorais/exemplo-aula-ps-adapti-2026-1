@@ -81,9 +81,13 @@ export function DialogUpdateInstrument({ id, children }: DialogUpdateInstrumentP
             &quot;Salvar&quot; para aplicar as alterações.
           </DialogDescription>
         </DialogHeader>
-        <form action={submit}>
-          <FormFieldsInstrument error={error} instrument={instrument} />
-        </form>
+        {instrument ? (
+          <form action={submit}>
+            <FormFieldsInstrument error={error} instrument={instrument} />
+          </form>
+        ) : (
+          <p className="text-muted-foreground text-sm">Carregando...</p>
+        )}
       </DialogContent>
     </Dialog>
   )

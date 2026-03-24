@@ -33,6 +33,7 @@ export default function ProductCard(instrument: InstrumentType) {
           alt={instrument.name}
           width={300}
           height={200}
+          unoptimized={true}
         />
       </Link>
       <h1 className={styles.productName}>{instrument.name}</h1>
