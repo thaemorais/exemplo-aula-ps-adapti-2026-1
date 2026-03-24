@@ -5,15 +5,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { buyInstrument } from '@/actions/instrumentsItem'
 import { useState } from 'react'
-import { Instrument } from '@/types/instrument'
+import { InstrumentType } from '@/types/instrument'
 
-export default function ProductCard(product: Instrument) {
+export default function ProductCard(instrument: InstrumentType) {
   const [loading, setLoading] = useState(false)
-  const [amount, setAmount] = useState(product.amount)
+  const [amount, setAmount] = useState(instrument.amount)
 
   async function handleBuy() {
     setLoading(true)
-    const result = await buyInstrument(product.id)
+    const result = await buyInstrument(instrument.id)
     const { response, error } = await JSON.parse(result)
     setLoading(false)
 
@@ -29,20 +29,20 @@ export default function ProductCard(product: Instrument) {
       <Link href="" className={styles.productLink}>
         <Image
           className={styles.productImage}
-          src={product.image || '/placeholder.png'}
-          alt={product.name}
+          src={instrument.image || '/placeholder.png'}
+          alt={instrument.name}
           width={300}
           height={200}
         />
       </Link>
-      <h1 className={styles.productName}>{product.name}</h1>
+      <h1 className={styles.productName}>{instrument.name}</h1>
       <p className={styles.productCategory}>
-        Categoria: {product.category?.name ?? '-'}
+        Categoria: {instrument.category?.name ?? '-'}
       </p>
-      <p className={styles.productBrand}>Marca: {product.brand}</p>
-      <p className={styles.productYear}>Lançamento: {product.year}</p>
+      <p className={styles.productBrand}>Marca: {instrument.brand}</p>
+      <p className={styles.productYear}>Lançamento: {instrument.year}</p>
       <p className={styles.productPrice}>
-        R$ {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}
+        R$ {typeof instrument.price === 'number' ? instrument.price.toFixed(2) : instrument.price}
       </p>
       <p className={styles.productStock}>{amount} em estoque</p>
       <button

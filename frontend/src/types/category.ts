@@ -1,6 +1,4 @@
-export type Category = {
+export type CategoryType = {
   id: string
   name: string
 }
-
-export type categoryType = Category

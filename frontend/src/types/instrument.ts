@@ -1,4 +1,4 @@
-import { Category } from './category'
+import { CategoryType } from './category'
 
 export type InstrumentType = {
   id: string
@@ -8,5 +8,5 @@ export type InstrumentType = {
   year: number | string
   image: string
   amount: number
-  category?: Category
+  category?: CategoryType
 }

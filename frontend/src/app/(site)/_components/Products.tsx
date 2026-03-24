@@ -4,17 +4,17 @@ import ProductCard from './ProductCard';
 import styles from './products.module.css'
 import { useEffect, useState } from 'react';
 import { api } from '@/services/api';
-import { Instrument } from '@/types/instrument';
+import { InstrumentType } from '@/types/instrument';
 
 export default function Products() {
-    const [products, setProducts] = useState<Instrument[]>([]);
+    const [instruments, setInstruments] = useState<InstrumentType[]>([]);
 
     useEffect(() => {
         async function getInstruments() {
             const { response, error } = await api('GET', '/instruments')
       
             if (response) {
-                setProducts(response as Instrument[])
+                setInstruments(response as InstrumentType[])
             } else {
                 console.error(error?.message)
             }
@@ -26,10 +26,10 @@ export default function Products() {
     return (
         <section className={styles.products} id="products"> 
             <div className={styles.container}>
-                <h1 className={styles.title}>Nossos Produtos</h1>
+                <h1 className={styles.title}>Nossos Instrumentos</h1>
                 <div className={styles.productsList}>
-                    {products.map((product) => (
-                        <ProductCard key={product.id} {...product} />
+                    {instruments.map((instrument) => (
+                        <ProductCard key={instrument.id} {...instrument} />
                     ))}
                 </div>
             </div>
