@@ -6,30 +6,64 @@
 
 .container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 12px 16px;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px;
+}
+
+.logoWrap {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(64px, 18vw, 100px);
+  height: clamp(64px, 18vw, 100px);
+}
+
+.logo {
+  object-fit: contain;
 }
 
 .headerLinks {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: end;
-  gap: 20px;
+  justify-content: flex-end;
+  gap: clamp(10px, 2vw, 20px);
+  flex: 1 1 auto;
+  min-width: min(100%, 200px);
 }
 
 .headerLink {
   text-decoration: none;
   color: #000;
-  font-size: 1.2rem;
+  font-size: clamp(0.9rem, 2.4vw, 1.2rem);
   font-weight: 600;
+  white-space: nowrap;
 }
 
-.headerLink:hover {
-  color: #f69915;
-  scale: 1.05;
-  transition: all 0.3s ease-in-out;
-  border-bottom: 2px solid #f69915;
+@media (hover: hover) {
+  .headerLink:hover {
+    color: #f69915;
+    scale: 1.05;
+    transition: all 0.3s ease-in-out;
+    border-bottom: 2px solid #f69915;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    justify-content: center;
+  }
+
+  .headerLinks {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .headerLink {
+    white-space: normal;
+    text-align: center;
+  }
 }

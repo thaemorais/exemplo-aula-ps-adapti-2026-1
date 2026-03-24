@@ -15,7 +15,16 @@ export default function Header() {
   return (
     <header className={styles.header}>
         <div className={styles.container}>
-            <Image src="/assets/logo.png" alt="Logo" width={100} height={100} />
+            <div className={styles.logoWrap}>
+              <Image
+                className={styles.logo}
+                src="/assets/logo.png"
+                alt="Logo"
+                fill
+                sizes="100px"
+                priority
+              />
+            </div>
             <div className={styles.headerLinks}>
                 <Link href="" onClick={() => scrollToElement('products')} className={styles.headerLink}>Produtos</Link>
                 <Link href="" className={styles.headerLink}>Categorias</Link>
