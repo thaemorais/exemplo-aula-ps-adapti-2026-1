@@ -1,4 +1,4 @@
-export type Product = {
+export type InstrumentType = {
     id: string;
     nome: string;
     marca: string;

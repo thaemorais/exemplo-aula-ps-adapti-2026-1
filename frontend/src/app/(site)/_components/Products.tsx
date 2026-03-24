@@ -1,10 +1,10 @@
-import { Product } from '@/types/product';
+import { InstrumentType } from '@/types/instrument';
 import ProductCard from './ProductCard';
 import styles from './products.module.css'
 
 export default function Products() {
 
-    const productMock: Product[] = [
+    const instruments: InstrumentType[] = [
         {
             id: '1',
             nome: 'Violão Acústico',
@@ -50,10 +50,10 @@ export default function Products() {
   return (
     <section className={styles.products}> 
         <div className={styles.container}>
-            <h1 className={styles.title}>Nossos Produtos</h1>
+            <h1 className={styles.title}>Nossos Instrumentos</h1>
             <div className={styles.productsList}>
-                {productMock.map((product) => (
-                    <ProductCard key={product.id} {...product} />
+                {instruments.map((instrument) => (
+                    <ProductCard key={instrument.id} {...instrument} />
                 ))}
             </div>
         </div>
